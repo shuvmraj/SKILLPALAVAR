@@ -3,20 +3,23 @@ package com.login.test.tests;
 import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInfo;
 
 import com.login.test.base.BaseTest;
 import com.login.test.pages.LoginPage;
 
 @DisplayName("Login Form Security Tests")
+@Order(3)
 public class LoginSecurityTest extends BaseTest {
 
     private LoginPage loginPage;
 
     @Override
     @BeforeEach
-    public void setUp() {
-        super.setUp();
+    public void setUp(TestInfo testInfo) {
+        super.setUp(testInfo);
         navigateToLoginPage();
         loginPage = new LoginPage(driver);
     }

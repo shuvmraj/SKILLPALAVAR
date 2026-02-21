@@ -21,6 +21,7 @@ public class LoginPage {
     private static final By SUBMIT_ERROR = By.id("submitError");
     private static final By SUCCESS_MESSAGE = By.id("successMessage");
     private static final By LOGIN_TITLE = By.xpath("//h1[@class='login-title']");
+    private static final By WELCOME_TITLE = By.xpath("//h1[contains(@class,'welcome-title')]");
 
     public LoginPage(WebDriver driver) {
         this.driver = driver;
@@ -30,6 +31,15 @@ public class LoginPage {
     public boolean isPageLoaded() {
         try {
             wait.until(ExpectedConditions.visibilityOfElementLocated(LOGIN_TITLE));
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public boolean isWelcomePageVisible() {
+        try {
+            wait.until(ExpectedConditions.visibilityOfElementLocated(WELCOME_TITLE));
             return true;
         } catch (Exception e) {
             return false;
@@ -46,6 +56,7 @@ public class LoginPage {
         WebElement passwordField = wait.until(ExpectedConditions.visibilityOfElementLocated(PASSWORD_INPUT));
         passwordField.clear();
         passwordField.sendKeys(password);
+        
     }
 
     public void clickLoginButton() {

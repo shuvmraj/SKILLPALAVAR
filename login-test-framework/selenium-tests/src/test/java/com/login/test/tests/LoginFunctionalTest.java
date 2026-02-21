@@ -3,22 +3,39 @@ package com.login.test.tests;
 import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInfo;
+import org.junit.jupiter.api.TestMethodOrder;
 
 import com.login.test.base.BaseTest;
 import com.login.test.pages.LoginPage;
 
 @DisplayName("Login Form Functional Tests")
+@Order(1)
+@TestMethodOrder(OrderAnnotation.class)
 public class LoginFunctionalTest extends BaseTest {
 
     private LoginPage loginPage;
 
     @Override
     @BeforeEach
-    public void setUp() {
-        super.setUp();
+    public void setUp(TestInfo testInfo) {
+        super.setUp(testInfo);
         navigateToLoginPage();
         loginPage = new LoginPage(driver);
+    }
+
+    @Test
+    @Order(1)
+    @DisplayName("Test 1.0: Successful login with valid credentials")
+    public void testSuccessfulLogin() {
+        loginPage.login("Raunit@gmail.com", "Raunit@123");
+
+        assertThat(loginPage.isWelcomePageVisible())
+            .as("Successful login should redirect to welcome screen")
+            .isTrue();
     }
 
     @Test
