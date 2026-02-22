@@ -125,7 +125,7 @@ Tests vulnerability prevention:
   - NoSQL injection
   - Password masking verification
   - Email data protection
-  - Session management
+  - Session management and control
 
 ### 4️⃣ Edge Case Tests (15 Tests)
 Tests unusual but valid scenarios:
